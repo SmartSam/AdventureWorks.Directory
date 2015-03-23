@@ -28,8 +28,7 @@ MVC 5 Employee Directory for Adventure Works
   
 
 ## Mobile Emulators:
-* Opera has a free mobile emulator for non-apple devices.
-* This can be downloaded from: http://www.opera.com/developer/mobile-emulator
+* Opera free mobile emulator for non-apple devices: http://www.opera.com/developer/mobile-emulator
 * Responsinator has a good online emulator for iPhone 5: http://www.responsinator.com/
 
 

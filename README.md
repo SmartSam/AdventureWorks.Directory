@@ -24,7 +24,7 @@ MVC 5 Employee Directory for Adventure Works
 * There are two other sql files to run to setup a table to store employee photos.
   * CreateEmployeePhotoTable.sql creates the HumanResources.EmployeePhoto table.
   * InsertPhotos.sql inserts records and image files into this table.  
-* There are only 2 image files that are used.  They are in the folder EmployeePhotos.  * You may have to update the file path to these photos in the InsertPhotos.sql.
+* There are only 2 image files that are used.  They are in the folder EmployeePhotos.  You may have to update the file path to these photos in the InsertPhotos.sql.
   
 
 ## Mobile Emulators:

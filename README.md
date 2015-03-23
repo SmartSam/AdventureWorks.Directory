@@ -2,10 +2,10 @@
 MVC 5 Employee Directory for Adventure Works
 
 
-### Operating System: Windows 7 Home Premium
-### Visual Studio Version: Visual Studio 13 Community Edition
-### SQLServer Version: SQLServer Express 2008
-### DevExpress Suite Version: DevExpressUniversalTrial-20150218
+#### Operating System: Windows 7 Home Premium
+#### Visual Studio Version: Visual Studio 13 Community Edition
+#### SQLServer Version: SQLServer Express 2008
+#### DevExpress Suite Version: DevExpressUniversalTrial-20150218
 
 ## About:
 * This is an ASP.Net MVC 5 application.  This application is an employee directory for Adventure Works.

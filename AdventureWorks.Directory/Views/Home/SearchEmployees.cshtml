@@ -1,0 +1,157 @@
+﻿@using AdventureWorks.Directory.Models
+@using DevExpress.Web.Mvc.UI
+@using System.Web.UI.WebControls
+
+@model IEnumerable<Employee>
+@{
+    ViewBag.Title = "Employee Search";
+}
+
+@*@Scripts.Render("~/bundles/jquery")*@
+<script type="text/jscript">
+
+    //$(function () {
+    //    $('#Branch').change(function () {
+    //        $.getJSON('/Home/DepartmentResList/' + $('#Branch').val(), function (data) {
+    //            var Listitems = '<option></option>'; //'<option>please Select Branch</option>';
+    //            $.each(data, function (i, Departments) {
+    //                Listitems += "<option value='" + Departments.Value + "'>" + Departments.Text + "</option>";
+    //            })
+    //            $('#Departments').html(Listitems);
+    //        })
+    //    })
+    //})
+    //$(function () {
+    //    $('#Search').click(function () {
+    //        $.ajax({
+    //            url: '/Home/EmployeesByCriteria/',
+    //            contentType: 'application/html; charset=utf-8',
+    //            type: 'GET',
+    //            dataType: 'html',
+    //            data: { 'nameCriteria': $('#nameCriteria').val(), 'Branch': $('#Branch').val(), 'Departments': $('#Departments').val(), 'Title': $('#Title').val() }
+    //        })
+    //         .success(function (result) {
+
+    //             $('#mainColumn').show();
+    //             $('#mainColumn').html(result)
+    //         })
+    //         .error(function (xhr, status) {
+    //             alert(status);
+    //             $('#mainColumn').hide();
+    //             //$('#mainColumn').html("<b>No Data to Display</b>");
+    //         })
+    //    })
+    //})
+    //function SalesDetailsUpdate(result) {
+    //    $('#mainColumn').html(result)
+    //}
+
+    //$(function () {
+    //    $('#Reset').click(function () {
+    //        $('#nameCriteria').val('');
+    //        $('#Branch').val('');
+    //        $('#Departments').val('');
+    //        $('#Title').val('');
+    //        $('#Branch').trigger('change');
+
+    //    })
+    //})
+
+
+    function SearchClick(s, e) {
+        $('#mainColumn').show();
+        EmployeeGridView.PerformCallback();
+    }
+
+    function ResetClick(s, e) {
+        NameCriteria.SetValue('');
+        Locations.SetValue('');
+        Departments.SetValue('');
+        UpdateDepartments();
+    }
+
+    function UpdateDepartments(id) {
+        Departments.PerformCallback(id);
+    }
+
+    function OnBeginCallback(s, e) {
+        e.customArgs["nameCriteria"] = NameCriteria.GetText();
+        e.customArgs["Departments"] = Departments.GetValue();
+        e.customArgs["State"] = Locations.GetValue();
+
+    }
+
+    function DoProcessEnterKey(htmlEvent) {
+        console.log(htmlEvent.keyCode);
+
+        if (htmlEvent.keyCode == 13) {
+            htmlEvent.cancelBubble = true;
+            SearchClick();
+        }
+    }
+
+    function OnHiperLinkClick(s, e, id) {
+        var path = '@Url.Action("GetImage", "Home")';
+        var path2 = path + "\\" + id
+        $('#myImg').attr('src',path2);
+        popupControl.Show();
+    }
+</script>
+
+<div data-role="header" align="center">
+</div>
+
+<div id="leftColumn">
+    <span>
+        @Html.Label("Initials or Name", new { @class = "form_Label" })<span class="form_Label">
+            &nbsp;(first and/or last)
+            <br />
+            @Html.DevExpress().TextBox(txtBox =>
+            {
+                txtBox.Name = "NameCriteria";
+                txtBox.Width = Unit.Pixel(99);
+                txtBox.ClientEnabled = true;
+                txtBox.Properties.ClientInstanceName = "NameCriteria";
+                txtBox.Properties.ClientSideEvents.KeyDown = "function(s, e) { DoProcessEnterKey(e.htmlEvent, 'tb2'); }";
+
+            }).GetHtml()
+        </span>
+        <span>
+            <br />
+            @Html.Label("State-Province", new { @class = "form_Label" })
+            <br />
+            @Html.Partial("LocationPartial")
+        </span>
+        <span>
+            <br />
+            @Html.Label("Departments", new { @class = "form_Label" })
+            <br />
+            @Html.Partial("DepartmentPartial")
+        </span>
+
+        <span display:inline-block;>
+            <br />
+
+            @Html.DevExpress().Button(btn =>
+                {
+                    btn.Name = "Search";
+                    btn.Text = "Search";
+                    btn.Width = Unit.Pixel(72);
+                    btn.UseSubmitBehavior = false;
+                    btn.ClientSideEvents.Click = "SearchClick";
+                }).GetHtml()
+
+            @Html.DevExpress().Button(btn =>
+                {
+                    btn.Name = "Reset";
+                    btn.Text = "Reset";
+                    btn.Width = Unit.Pixel(72);
+                    btn.UseSubmitBehavior = false;
+                    btn.ClientSideEvents.Click = "ResetClick";
+                }).GetHtml()
+        </span>
+</div>
+<div id="mainColumn" style="display: none">
+    @Html.Partial("EmployeeSearchResultsDX")
+</div>
+

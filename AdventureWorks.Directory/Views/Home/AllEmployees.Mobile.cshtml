@@ -1,0 +1,16 @@
+﻿@using AdventureWorks.Directory.Models
+@model IEnumerable<Employee>
+
+<ul data-role="listview" data-filter="true">
+    @foreach(var employee in Model) {
+        <li>
+              <a href="@Url.Action("EmployeeById", new {employee.Employee_Id})">
+                     <span>@employee.Full_Name</span><br /><small>@employee.Job_Title</small></a>            
+        </li>                                              
+    }    
+</ul>
+
+
+
+ 
+ 

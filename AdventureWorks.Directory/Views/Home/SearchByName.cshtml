@@ -1,0 +1,19 @@
+﻿
+@using AdventureWorks.Directory.Models
+@model IEnumerable<Employee>
+
+@*@{
+    ViewBag.Title = "Search By Name";
+}*@
+
+
+
+@using(Html.BeginForm("EmployeesByName","Home", FormMethod.Get))
+{
+    
+   <p style="vertical-align:central">
+       @Html.TextBox("nameCriteria")  
+        <input type="submit" value="Search By Name" /></p>
+}
+
+

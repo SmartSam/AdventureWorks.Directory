@@ -1,0 +1,23 @@
+﻿@using AdventureWorks.Directory.Models
+@model IEnumerable<Employee>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+             <th>Phone Number</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var employee in Model) {
+            <tr>
+                <td>@Html.ActionLink(employee.Full_Name, "EmployeeById", new { employee.Employee_Id })</td>
+                <td><a href=@string.Join("tel:+", employee.Phone_Number)>
+               @employee.Phone_Number
+            </a></td>
+                @*<td>@employee.Phone_Number</td>*@
+            </tr>                                           
+        }
+    </tbody>
+</table>

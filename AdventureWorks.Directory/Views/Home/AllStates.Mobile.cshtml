@@ -1,0 +1,19 @@
+﻿@model IEnumerable<string>
+
+@{
+    ViewBag.Title = "All States-Provinces";
+}
+
+<ul data-role="listview" data-filter="true">
+    @foreach (var state in Model)
+    {
+        <li>@Html.ActionLink(state, "EmployeesByState", new { state })</li>
+    }
+</ul>
+
+
+
+
+
+
+

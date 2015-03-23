@@ -1,0 +1,45 @@
+﻿
+ @using DevExpress.Web.Mvc.UI;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+      @Scripts.Render("~/bundles/jquery")
+    @Html.DevExpress().GetScripts( 
+        new Script { ExtensionSuite = ExtensionSuite.NavigationAndLayout }, 
+        new Script { ExtensionSuite = ExtensionSuite.GridView }, 
+        new Script { ExtensionSuite = ExtensionSuite.Editors }
+    ) 
+   
+</head>
+<body>
+   @* @Html.Partial("_ViewSwitcher")*@
+    @Html.DevExpress().GetStyleSheets( 
+        new StyleSheet { ExtensionSuite = ExtensionSuite.NavigationAndLayout }, 
+        new StyleSheet { ExtensionSuite = ExtensionSuite.Editors }, 
+        new StyleSheet { ExtensionSuite = ExtensionSuite.GridView }   
+    )
+
+   
+
+   <div id="navigation">
+        <div id="main-nav">
+            @*<span>@Html.Label("Search Employees", new { @class = "header_Label" })</span>*@
+            <ul class="tabbed">      
+                <li>
+                    @Html.MenuItem("Employees", "SearchEmployees", "Home")
+                    </li>
+            </ul>
+            <div class="clearer">&nbsp;</div>
+        </div>
+    </div>
+    
+    @RenderSection("scripts", required: false)
+    @RenderBody()
+    
+</body>
+</html>

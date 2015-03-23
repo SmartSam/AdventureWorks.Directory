@@ -1,0 +1,64 @@
+﻿@model AdventureWorks.Directory.Models.Employee
+
+@{
+  
+    //var imagePath = @Model.Picture_URL;
+    var phoneNumber = @Model.Phone_Number;
+    var workPhone = string.Concat("location.href='tel:", @Model.Phone_Number, "'");
+    
+}
+
+
+<div>
+    <label for="Full_Name">Name</label>
+</div>
+<div>
+    @Html.TextBoxFor(model => model.Full_Name)
+</div>
+
+<div>
+     <label for="Job_Title">Title</label>
+</div>
+<div>
+    @Html.TextBoxFor(model => model.Job_Title)  
+</div>
+
+<div>
+     <label for="Branch">State-Province</label>
+</div>
+
+<div>
+    @Html.TextBoxFor(model => model.State)  
+</div>
+
+<div>
+     <label for="Department">Department</label>
+</div>
+
+<div>
+    @Html.TextBoxFor(model => model.Department)  
+</div>
+<div>
+    <label for="Phone_Number">Phone</label>
+</div>
+<div>
+     @*@Html.TextBoxFor(model => model.Phone_Number)*@
+   @* <a href=@string.Join("tel:+", @phoneNumber)>@phoneNumber</a>*@
+    @*<button onclick=>@phoneNumber</button>*@
+    <button onclick=@workPhone>@phoneNumber</button>
+</div>
+<div>
+    <label for="EMail">EMail</label>
+</div>
+
+<div>
+    @Html.TextBoxFor(model => model.EMail)
+</div>
+
+
+
+
+
+
+
+

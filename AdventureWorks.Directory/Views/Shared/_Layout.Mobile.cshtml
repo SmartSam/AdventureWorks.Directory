@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/Mobile/css", "~/Content/jquerymobile/css")    
+    @Scripts.Render("~/bundles/jquery", "~/bundles/jquerymobile")
+
+</head>
+<body>
+    <div data-role="page" data-theme="c">
+      @*  @Html.Partial("_ViewSwitcher")*@
+        @*<div data-role="header" align="center"  data-theme="c">
+            <span><button onclick="location.href='@Url.Action("Index", "Home")';return false;">Home</button></span>
+        </div>*@
+        <div data-role="content">
+            @RenderSection("featured", false)
+            @RenderBody()
+            <script>
+                $(document).ready(function () {
+                    $.mobile.ajaxEnabled = false;
+                });
+            </script>
+            @RenderSection("scripts", required: false)
+        </div>
+    </div>
+</body>
+</html>

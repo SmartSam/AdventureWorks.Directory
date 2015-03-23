@@ -1,0 +1,21 @@
+﻿@using System.Web.Helpers
+@using DevExpress.Web.Mvc.UI
+@using System.Web.UI.WebControls
+@using AdventureWorks.Directory.Models
+@model IEnumerable<Employee>
+
+@Html.DevExpress().ComboBox(settings => {
+        settings.Name = "Locations";
+        settings.CallbackRouteValues = new { Controller = "Home", Action = "LocationPartial" };
+        settings.Properties.ValueType = typeof(string);
+        settings.Properties.IncrementalFilteringMode = IncrementalFilteringMode.StartsWith;
+        settings.Properties.ClientInstanceName = "Locations";
+        settings.Properties.TextField = "Text";
+        settings.Properties.ValueField = "Value";
+        //settings.Width = 171;
+        settings.Properties.CallbackPageSize = 200;
+        settings.Properties.ClearButton.Visibility = AutoBoolean.True;
+        settings.Properties.EnableClientSideAPI = true;
+        //settings.Properties.ClientSideEvents.Init = "function(s, e) { s.InsertItem(0, '', 0); }";
+        settings.Properties.ClientSideEvents.SelectedIndexChanged = "function(s, e) {Departments.PerformCallback(); }";
+}).BindList(ViewData["Locations"]).GetHtml()

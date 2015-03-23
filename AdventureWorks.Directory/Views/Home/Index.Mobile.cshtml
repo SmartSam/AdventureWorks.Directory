@@ -1,0 +1,17 @@
+﻿@using AdventureWorks.Directory.Models
+@model IEnumerable<Employee>
+
+<div data-role="header" align="center">
+</div>
+  
+        
+<div data-role="content" align="center">
+   
+  <span><button onclick="location.href='@Url.Action("SearchByName", "Home")';return false;">Search By Name</button></span>
+  <span><button onclick="location.href='@Url.Action("AllCountries", "Home")';return false;">Country</button></span>
+  <span><button onclick="location.href='@Url.Action("AllStates", "Home")';return false;">State-Province</button></span>
+  <span><button onclick="location.href='@Url.Action("AllDepartments", "Home")';return false;">Departments</button></span>
+</div>
+
+
+

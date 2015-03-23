@@ -1,0 +1,113 @@
+﻿@using AdventureWorks.Directory.Models
+@using System.Web.Helpers
+@using DevExpress.Web.Mvc.UI
+@using System.Web.UI.WebControls
+@using AdventureWorks.Directory.Controllers
+
+@model IEnumerable<Employee>
+@*<table>
+        <tr>
+            <td>
+                @using (Html.BeginForm("ExportToXLSX", "Home", FormMethod.Post))
+                {
+                    @Html.DevExpress().Button(btn =>
+               {
+                   btn.Name = "btnExportToXLSX";
+                   btn.Text = "XLSX Export";
+                   btn.UseSubmitBehavior = true;
+               }).GetHtml()
+
+
+                }
+            </td>
+            <td>&nbsp</td>
+            <td>
+                @using (Html.BeginForm("ExportToPDF", "Home", FormMethod.Post))
+                {
+                    @Html.DevExpress().Button(btn =>
+               {
+                   btn.Name = "btnExportToPDF";
+                   btn.Text = "PDF Export";
+                   btn.UseSubmitBehavior = true;
+               }).GetHtml()
+                }
+            </td>
+        </tr>
+    </table>*@
+
+@*@Html.DevExpress().GridView(GridViewHelper.ExportGridViewSettings).Bind(Model).GetHtml()*@
+
+@Html.DevExpress().GridView(
+    settings =>
+    {
+        settings.Name = "EmployeeGridView";
+        settings.CallbackRouteValues = new { Controller = "Home", Action = "EmployeesByCriteria" };
+        settings.SettingsPager.PageSize = 25;
+        settings.Width = Unit.Percentage(80);
+        settings.Height = Unit.Pixel(1000);
+        settings.KeyFieldName = "Employee_Id";
+        settings.Columns.Add(column =>
+        {
+            column.Caption = "Name";
+            column.SetDataItemTemplateContent(c =>
+            {
+                Html.DevExpress().HyperLink(hlSettings =>
+                {
+                    hlSettings.Name = "cl_" + c.KeyValue.ToString();
+                    hlSettings.Properties.Text = DataBinder.Eval(c.DataItem, "Full_Name").ToString(); ;
+                    string id = DataBinder.Eval(c.DataItem, "Employee_Id").ToString();
+                    hlSettings.Properties.ClientSideEvents.Click = string.Format("function(s, e) {{ OnHiperLinkClick(s, e, {0}); }}", id);
+
+                }).Render();
+            });
+        });
+
+        settings.Columns.Add("Job_Title", "Job Title");
+        settings.Columns.Add("Department", "Department");
+        settings.Columns.Add("Phone_Number", "Phone");
+        settings.Columns.Add(Email =>
+        {
+            Email.FieldName = "EMail";
+            Email.Caption = "Email";
+
+            //Set hyperlink
+            Email.ColumnType = MVCxGridViewColumnType.HyperLink;
+            var hyperLinkProperties = Email.PropertiesEdit as HyperLinkProperties;
+            //String urlFormatString = Url.Action("Action", "Controller", new RouteValueDictionary(new { ID = "{0}" }));
+            String urlFormatString = string.Format("mailto:{0}", Email.ToString());
+            hyperLinkProperties.NavigateUrlFormatString = HttpUtility.UrlDecode(urlFormatString);
+        });
+        settings.Columns.Add("State", "State-Province");
+        settings.ClientVisible = true;
+        settings.ClientSideEvents.BeginCallback = "OnBeginCallback";
+        settings.SettingsLoadingPanel.Mode = GridViewLoadingPanelMode.Disabled;
+        settings.SettingsPager.AlwaysShowPager = false;
+        settings.SettingsExport.RenderBrick = (sender, e) =>
+        {
+            if (e.RowType == GridViewRowType.Data && e.VisibleIndex % 2 == 0)
+                e.BrickStyle.BackColor = System.Drawing.Color.FromArgb(0xEE, 0xEE, 0xEE);
+        };
+
+    }).Bind(Model).GetHtml()
+
+@{
+    @Html.DevExpress().PopupControl(settings =>
+  {
+      settings.Name = "popupControl";
+      //settings.PopupAction = PopupAction.None;
+      settings.CloseAction = CloseAction.OuterMouseClick;
+      settings.PopupVerticalAlign = PopupVerticalAlign.Below;
+      settings.PopupHorizontalAlign = PopupHorizontalAlign.LeftSides;
+      settings.ShowHeader = false;
+      settings.ShowFooter = false;
+      settings.AllowDragging = false;
+      settings.AutoUpdatePosition = true;
+      settings.PopupHorizontalOffset = 200;
+      settings.PopupVerticalOffset = 100;
+
+      settings.SetContent(() =>
+                   {
+                       ViewContext.Writer.Write(@"<img id='myImg' src='' alt='' height='240' width='240'>");
+                   });
+  }).GetHtml()
+}

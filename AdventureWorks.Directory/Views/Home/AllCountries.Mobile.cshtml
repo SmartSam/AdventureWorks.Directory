@@ -1,0 +1,14 @@
+﻿@model IEnumerable<string>
+
+@{
+    ViewBag.Title = "All Countries";
+}
+
+
+<ul data-role="listview" data-filter="true">
+    @foreach(var country in Model) {
+        <li>@Html.ActionLink(country, "EmployeesByCountry", new { country })</li>
+    }
+</ul>
+
+

@@ -1,0 +1,16 @@
+﻿@using AdventureWorks.Directory.Models
+@model IEnumerable<Employee>
+
+@{
+    ViewBag.Title = "Search By Name";
+}
+
+
+@using(Html.BeginForm("EmployeesByName","Home"))
+{
+    
+   <p>
+        Search by first name, last name or initials: @Html.TextBox("nameCriteria")  
+        <input type="submit" value="Search" /></p>
+}
+

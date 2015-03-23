@@ -20,7 +20,7 @@ MVC 5 Employee Directory for Adventure Works
 * AdventureWorks database can be downloaded from: https://msftdbprodsamples.codeplex.com/releases/view/93587
 
 ## Database changes:
-* This application uses custom view to query the employee records.  There is an sql file: CreateDirectoryView.sql that creates this view.
+* This application uses a custom view to query the employee records.  There is an sql file: CreateDirectoryView.sql that creates this view.
 * There are two other sql files to run to setup a table to store employee photos.
   * CreateEmployeePhotoTable.sql creates the HumanResources.EmployeePhoto table.
   * InsertPhotos.sql inserts records and image files into this table.  

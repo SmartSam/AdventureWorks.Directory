@@ -1,0 +1,11 @@
+<%@ Register TagPrefix="dx" Namespace="DevExpress.Data" Assembly="DevExpress.Data.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" %>
+<%@ Register TagPrefix="dx" Namespace="DevExpress.Web.ASPxPager" Assembly="DevExpress.Web.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" %>
+
+<dx:ASPxPager runat="server" CurrentPageNumberFormat="{0}" ItemSpacing="0px" SpriteCssFilePath="~/App_Themes/Metropolis/{0}/sprite.css" CssPostfix="Metropolis" CssFilePath="~/App_Themes/Metropolis/{0}/styles.css">
+    <PageSizeItemSettings ShowPopupShadow="False">
+        <DropDownImage>
+            <SpriteProperties HottrackedCssClass="dxWeb_pPopOutHover_Metropolis" PressedCssClass="dxWeb_pPopOutPressed_Metropolis" />
+        </DropDownImage>
+    </PageSizeItemSettings>
+</dx:ASPxPager>
+
